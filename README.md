@@ -10,6 +10,9 @@ Before starting, ensure the following are installed:
 - Python (3.6 or later)
 - Google Chrome browser
 - ChromeDriver (compatible with your Chrome version)
+- Pillow (Python Imaging Library)
+- selenium
+- beautifulsoup4 (for bs4)
 
 ## Installation
 
@@ -24,9 +27,7 @@ cd [Project Directory Name]
 ### 3. Install Required Python Libraries
 
 Install the required Python packages:
-```
-pip install -r requirements.txt
-```
+
 
 ## Configuration
 
