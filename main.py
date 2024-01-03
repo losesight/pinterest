@@ -17,7 +17,7 @@ USERNAME0 = []
 USERNAME1 = []
 USERNAME2 = []
 
-MIN_FILE_SIZE = 20 * 1024  # 20 KB in bytes
+MIN_FILE_SIZE = 20 * 1024  
 ACCOUNTS = ["Instert 3 accounts here if you only have one account only input one email"],
 
 
@@ -60,7 +60,6 @@ def scrape_images_from_user(usernames, account_index):
             print(f"Accessing {user_profile_url} for account index {account_index}")
             driver.get(user_profile_url)
 
-            # Add a check to ensure the page has loaded
             try:
                 WebDriverWait(driver, 10).until(
                     EC.presence_of_element_located((By.CSS_SELECTOR, "img"))
@@ -68,7 +67,7 @@ def scrape_images_from_user(usernames, account_index):
                 print("Page loaded successfully.")
             except Exception as wait_e:
                 print(f"Error waiting for page to load for {user_profile_url}: {wait_e}")
-                continue  # If the page fails to load properly, continue to the next user
+                continue 
 
             last_height = driver.execute_script("return document.body.scrollHeight")
             while True:
@@ -83,8 +82,7 @@ def scrape_images_from_user(usernames, account_index):
             images = soup.find_all('img', src=lambda x: x and "236x" in x)
             if not images:
                 print(f"No images found on the page for {random_user}.")
-                continue  # If no images are found, continue to the next user
-
+                continue  
             for img in images:
                 if image_count >= 50:
                     break
@@ -106,20 +104,19 @@ def post_images_to_pinterest(image_paths, driver):
         EC.presence_of_element_located((By.XPATH, "//input[@type='file']"))
     )
 
-    # Join image paths to a single string separated by '\n' to simulate multiple file selection
+   
     image_paths_str = "\n".join(image_paths)
     image_upload_input.send_keys(image_paths_str)
 
-    # Wait until all images are uploaded
-    # This needs to be adjusted based on the website's response, perhaps checking for a specific element or change in the page
-    time.sleep(20)  # Adjust this sleep time based on average upload time
+   e
+    time.sleep(20)  
 
-    # Click on the checkbox
+
     checkbox = driver.find_element(By.ID, "storyboard-drafts-sidebar-bulk-select-checkbox")
     checkbox.click()
-    time.sleep(2)  # Wait for 2 seconds
+    time.sleep(2)  
 
-    # Click on 'Publish'
+
     publish_button = driver.find_element(By.XPATH, "//div[contains(@class, 'tBJ dyH iFc sAJ xnr tg7 H2s')]")
     publish_button.click()
     time.sleep(10)
@@ -204,7 +201,7 @@ def process_account(account_index):
             driver.quit()
 
 def login_check(driver):
-    # Function to check if login is successful
+   
     try:
         WebDriverWait(driver, 5).until(EC.presence_of_element_located((By.XPATH, "//div[text()='Home']")))
         return True
